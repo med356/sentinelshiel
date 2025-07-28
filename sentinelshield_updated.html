@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SentinelShield - Advanced Cybersecurity Protection</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-blue: #0066ff;
+            --dark-blue: #001a3d;
+            --light-blue: #3385ff;
+            --gray-dark: #1a1a1a;
+            --gray-medium: #333;
+            --gray-light: #666;
+            --white: #ffffff;
+            --accent-cyan: #00ffff;
+            --gradient-primary: linear-gradient(135deg, #0066ff 0%, #00ffff 100%);
+            --gradient-secondary: linear-gradient(135deg, #001a3d 0%, #0066ff 100%);
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: var(--white);
+            background: var(--gray-dark);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(26, 26, 26, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-cyan);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-cyan);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .mobile-menu span {
+            width: 25px;
+            height: 3px;
+            background: var(--white);
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            background: var(--gradient-secondary);
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 30% 50%, rgba(0, 255, 255, 0.1) 0%, transparent 50%);
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.6; }
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-text h1 {
+            font-size: 3.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+            animation: slideInLeft 1s ease;
+        }
+
+        .hero-text .highlight {
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-text p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            color: #ccc;
+            animation: slideInLeft 1s ease 0.2s both;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            animation: slideInLeft 1s ease 0.4s both;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: var(--gradient-primary);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 102, 255, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid var(--primary-blue);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary-blue);
+            transform: translateY(-2px);
+        }
+
+        .hero-visual {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: slideInRight 1s ease;
+        }
+
+        .shield-icon {
+            width: 300px;
+            height: 300px;
+            position: relative;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        /* Features Section */
+        .features {
+            padding: 5rem 0;
+            background: var(--gray-dark);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: var(--gray-medium);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .feature-card:hover::before {
+            left: 100%;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent-cyan);
+            box-shadow: 0 15px 30px rgba(0, 255, 255, 0.2);
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1rem;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--accent-cyan);
+        }
+
+        /* Testimonials Section */
+        .testimonials {
+            padding: 5rem 0;
+            background: var(--gradient-secondary);
+        }
+
+        .trust-logos {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .trust-logo {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1rem;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .trust-logo:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.05);
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .testimonial {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            border-left: 4px solid var(--accent-cyan);
+        }
+
+        .testimonial p {
+            font-style: italic;
+            margin-bottom: 1rem;
+        }
+
+        .testimonial-author {
+            font-weight: bold;
+            color: var(--accent-cyan);
+        }
+
+        /* Pricing Section */
+        .pricing {
+            padding: 5rem 0;
+            background: var(--gray-dark);
+        }
+
+        .pricing-grid {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        .pricing-card {
+            background: var(--gray-medium);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            position: relative;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            max-width: 400px;
+            width: 100%;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary-blue);
+        }
+
+        .pricing-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--accent-cyan);
+        }
+
+        .price {
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--white);
+            margin-bottom: 1rem;
+        }
+
+        .price span {
+            font-size: 1rem;
+            color: var(--gray-light);
+        }
+
+        .features-list {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .features-list li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .features-list li::before {
+            content: '✓';
+            color: var(--accent-cyan);
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark-blue);
+            padding: 3rem 0 1rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            color: var(--accent-cyan);
+            margin-bottom: 1rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a {
+            color: var(--gray-light);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--accent-cyan);
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--gray-medium);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-icon:hover {
+            background: var(--primary-blue);
+            transform: scale(1.1);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid var(--gray-medium);
+            padding-top: 1rem;
+            text-align: center;
+            color: var(--gray-light);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu {
+                display: flex;
+            }
+
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .shield-icon {
+                width: 200px;
+                height: 200px;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Scroll animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <div class="nav-content">
+                <div class="logo">🛡️ SentinelShield</div>
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#pricing">Pricing</a></li>
+                    <li><a href="#support" title="Get Help & Support"><span style="margin-right: 4px;">💬</span>Help Center</a></li>
+                </ul>
+                <div class="mobile-menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>Protect What <span class="highlight">Matters</span>. Stay Secure with SentinelShield.</h1>
+                    <p>Next-gen antivirus and real-time threat detection for peace of mind. Advanced cybersecurity solutions for personal and enterprise users.</p>
+                    <div class="cta-buttons">
+                        <a href="#pricing" class="btn btn-primary">Download Now</a>
+                        <a href="#features" class="btn btn-secondary">Learn More</a>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="shield-icon">
+                        <svg width="300" height="300" viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <linearGradient id="shieldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" stop-color="#0066ff"/>
+                                    <stop offset="100%" stop-color="#00ffff"/>
+                                </linearGradient>
+                            </defs>
+                            <path d="M150 30L240 60V150C240 200 150 270 150 270C150 270 60 200 60 150V60L150 30Z" fill="url(#shieldGradient)" opacity="0.8"/>
+                            <path d="M150 50L220 75V145C220 185 150 240 150 240C150 240 80 185 80 145V75L150 50Z" fill="none" stroke="#00ffff" stroke-width="2"/>
+                            <circle cx="150" cy="130" r="30" fill="none" stroke="#ffffff" stroke-width="3"/>
+                            <path d="M140 130L148 138L160 122" stroke="#ffffff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <h2 class="section-title fade-in">Advanced Security Features</h2>
+            <div class="features-grid">
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">🔒</div>
+                    <h3>Real-Time Protection</h3>
+                    <p>Advanced AI-powered threat detection that monitors your system 24/7, blocking malware, viruses, and zero-day attacks in real-time.</p>
+                </div>
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">🌐</div>
+                    <h3>Secure Web Browsing</h3>
+                    <p>Safe browsing protection that blocks malicious websites, phishing attempts, and dangerous downloads before they reach your device.</p>
+                </div>
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">🔐</div>
+                    <h3>Identity Theft Prevention</h3>
+                    <p>Comprehensive identity protection monitoring your personal information across the web and dark web to prevent identity theft.</p>
+                </div>
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">☁️</div>
+                    <h3>Cloud Backup</h3>
+                    <p>Automated secure cloud backup ensuring your important files are always protected and recoverable from anywhere.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <div class="container">
+            <h2 class="section-title fade-in">Trusted by Industry Leaders</h2>
+            <div class="trust-logos fade-in">
+                <div class="trust-logo">TechCorp</div>
+                <div class="trust-logo">SecureBank</div>
+                <div class="trust-logo">GlobalTech</div>
+                <div class="trust-logo">DataSafe Inc</div>
+                <div class="trust-logo">CyberPro</div>
+            </div>
+            <div class="testimonial-grid">
+                <div class="testimonial fade-in">
+                    <p>"SentinelShield has been a game-changer for our enterprise security. The real-time protection is unmatched."</p>
+                    <div class="testimonial-author">- Sarah Johnson, IT Director at TechCorp</div>
+                </div>
+                <div class="testimonial fade-in">
+                    <p>"Finally, a security solution that doesn't slow down our systems. The cloud backup feature saved us multiple times."</p>
+                    <div class="testimonial-author">- Mike Chen, CTO at GlobalTech</div>
+                </div>
+                <div class="testimonial fade-in">
+                    <p>"The identity theft prevention caught threats we never knew existed. Highly recommend for any business."</p>
+                    <div class="testimonial-author">- Lisa Rodriguez, Security Manager at SecureBank</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing" id="pricing">
+        <div class="container">
+            <h2 class="section-title fade-in">Get Started Today</h2>
+            <div class="pricing-grid">
+                <div class="pricing-card fade-in">
+                    <h3>Free Beta</h3>
+                    <div class="price">$0<span>/month</span></div>
+                    <ul class="features-list">
+                        <li>Basic antivirus protection</li>
+                        <li>Real-time scanning</li>
+                        <li>Email support</li>
+                        <li>1 device protection</li>
+                        <li>Early access to new features</li>
+                        <li>Community support</li>
+                    </ul>
+                    
+                    <!-- Enhanced Download Section -->
+                    <div class="download-section">
+                        <div id="platform-message" class="platform-message" style="display: none;">
+                            We detected you're using <span id="detected-platform"></span>. 
+                            <span id="auto-download-text">Download will start automatically,</span> 
+                            or choose another platform below.
+                        </div>
+                        <div class="download-buttons">
+                            <a href="SentinelShield_Windows.exe" class="btn btn-primary download-btn windows-btn" id="windows-btn">
+                                <span class="platform-logo">
+                                    <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                                        <path d="M3,12V6.75L9,5.43V11.91L3,12M20,3V11.75L10,11.9V5.21L20,3M3,13L9,13.09V19.9L3,18.75V13M20,13.25V22L10,20.09V13.1L20,13.25Z"/>
+                                    </svg>
+                                </span>
+                                Download for Windows
+                            </a>
+                            <a href="#" class="btn btn-primary download-btn android-btn" id="android-btn">
+                                <span class="platform-logo">
+<svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+    <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>
+</svg>
+                                </span>
+                                Download for Android
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="support">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>SentinelShield</h3>
+                    <p>Advanced cybersecurity solutions for the modern digital world. Protecting what matters most.</p>
+                    <div class="social-icons">
+                        <a href="#" class="social-icon">f</a>
+                        <a href="#" class="social-icon">t</a>
+                        <a href="#" class="social-icon">in</a>
+                        <a href="#" class="social-icon">yt</a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Support</h3>
+<ul>
+    <li><a href="mailto:sentinelshield@gmail.com?subject=Help Center Request">Help Center</a></li>
+    <li><a href="mailto:sentinelshield@gmail.com?subject=Contact Request">Contact Us</a></li>
+    <li><a href="mailto:sentinelshield@gmail.com?subject=Bug Report">Bug Report</a></li>
+    <li><a href="mailto:sentinelshield@gmail.com?subject=Feature Request">Feature Request</a></li>
+</ul>
+
+                </div>
+                <div class="footer-section">
+                    <h3>Company</h3>
+                    <ul>
+                        <li><a href="sentinelshield_about.html">About Us</a></li>
+                        <li><a href="sentinelshield_privacy.html">Privacy Policy</a></li>
+                        <li><a href="sentinelshield_terms.html">Terms of Service</a></li>
+                        <li><a href="#pricing">Download</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 SentinelShield. All rights reserved. | Protecting your digital world since 2020.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Mobile menu toggle
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const navLinks = document.querySelector('.nav-links');
+
+        mobileMenu.addEventListener('click', () => {
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+        });
+
+        // Navbar background on scroll
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 100) {
+                nav.style.background = 'rgba(26, 26, 26, 0.98)';
+            } else {
+                nav.style.background = 'rgba(26, 26, 26, 0.95)';
+            }
+        });
+
+        // Pricing card interactions
+        document.querySelectorAll('.pricing-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-10px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        // Platform detection and download handling
+        document.addEventListener('DOMContentLoaded', function() {
+            const platformMessage = document.getElementById('platform-message');
+            const detectedPlatform = document.getElementById('detected-platform');
+            const windowsBtn = document.getElementById('windows-btn');
+            const androidBtn = document.getElementById('android-btn');
+            const autoDownloadText = document.getElementById('auto-download-text');
+            
+            // Detect platform
+            let platform = 'unknown';
+            let isMobile = false;
+            const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+            
+            // Windows detection
+            if (/windows/i.test(userAgent)) {
+                platform = 'Windows';
+            } 
+            // Android detection
+            else if (/android/i.test(userAgent)) {
+                platform = 'Android';
+                isMobile = true;
+            }
+            
+            // Show platform message if detection succeeded
+            if (platform !== 'unknown') {
+                platformMessage.style.display = 'block';
+                detectedPlatform.textContent = platform;
+                
+                // Highlight the appropriate button
+                if (platform === 'Windows') {
+                    windowsBtn.classList.add('recommended');
+                    windowsBtn.style.fontWeight = 'bold';
+                    windowsBtn.style.border = '2px solid #00ffff';
+                } else if (platform === 'Android') {
+                    androidBtn.classList.add('recommended');
+                    androidBtn.style.fontWeight = 'bold';
+                    androidBtn.style.border = '2px solid #00ffff';
+                }
+                
+                // Auto-trigger download (only for desktop, and after a short delay)
+                if (!isMobile && platform === 'Windows') {
+                    setTimeout(() => {
+                        // Uncomment to enable auto-download
+                        // window.location.href = 'SentinelShield_Windows.exe';
+                    }, 3000);
+                } else {
+                    // Hide auto-download text for mobile or unknown platforms
+                    autoDownloadText.style.display = 'none';
+                }
+            } else {
+                // Fallback for unknown platforms
+                platformMessage.style.display = 'block';
+                detectedPlatform.textContent = 'an unknown platform';
+                autoDownloadText.style.display = 'none';
+            }
+        });
+    </script>
+
+    <style>
+        /* Additional styles for the download section */
+        .download-section {
+            margin-top: 20px;
+            text-align: center;
+        }
+        
+        .platform-message {
+            background-color: rgba(0, 180, 255, 0.1);
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            font-size: 14px;
+            border-left: 3px solid #00b4ff;
+        }
+        
+        .download-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .download-btn {
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px 20px;
+        }
+        
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 180, 255, 0.3);
+        }
+        
+        .download-btn.recommended::after {
+            content: 'Recommended';
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: #00ffff;
+            color: #000;
+            font-size: 10px;
+            padding: 3px 8px;
+            border-radius: 10px;
+            font-weight: bold;
+        }
+        
+        .windows-btn {
+            background: linear-gradient(135deg, #0078d7, #00b4ff);
+        }
+        
+        .android-btn {
+            background: linear-gradient(135deg, #3ddc84, #2bb673);
+        }
+        
+        .platform-logo {
+            display: inline-flex;
+            align-items: center;
+        }
+        
+        @media (max-width: 768px) {
+            .download-buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
+</body>
+</html>

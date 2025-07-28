@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SentinelShield - Download Your Security Suite</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-blue: #0066ff;
+            --dark-blue: #001a3d;
+            --light-blue: #3385ff;
+            --gray-dark: #1a1a1a;
+            --gray-medium: #333;
+            --gray-light: #666;
+            --white: #ffffff;
+            --accent-cyan: #00ffff;
+            --gradient-primary: linear-gradient(135deg, #0066ff 0%, #00ffff 100%);
+            --gradient-secondary: linear-gradient(135deg, #001a3d 0%, #0066ff 100%);
+            --success-green: #00cc44;
+            --windows-blue: #0078d4;
+            --apple-gray: #333;
+            --linux-orange: #ff6600;
+            --android-green: #32de84;
+            --ios-blue: #007aff;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--white);
+            background: var(--gray-dark);
+            min-height: 100vh;
+        }
+
+        /* Header */
+        .header {
+            background: var(--gradient-secondary);
+            padding: 2rem 0;
+            border-bottom: 1px solid var(--gray-medium);
+            text-align: center;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .success-message {
+            background: rgba(0, 204, 68, 0.1);
+            border: 1px solid var(--success-green);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 2rem auto;
+            max-width: 600px;
+            text-align: center;
+        }
+
+        .success-icon {
+            font-size: 3rem;
+            color: var(--success-green);
+            margin-bottom: 1rem;
+        }
+
+        .success-title {
+            font-size: 1.8rem;
+            color: var(--success-green);
+            margin-bottom: 0.5rem;
+        }
+
+        .success-subtitle {
+            font-size: 1.1rem;
+            color: var(--white);
+            opacity: 0.9;
+        }
+
+        /* Main Content */
+        .main-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 20px;
+        }
+
+        .section {
+            background: var(--gray-medium);
+            padding: 2.5rem;
+            border-radius: 15px;
+            border: 1px solid var(--gray-light);
+            margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-primary);
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent-cyan);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-subtitle {
+            font-size: 1rem;
+            color: var(--gray-light);
+            margin-bottom: 2rem;
+        }
+
+        /* Download Buttons */
+        .download-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .download-btn {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.5rem;
+            background: var(--gray-dark);
+            border: 2px solid var(--gray-light);
+            border-radius: 12px;
+            text-decoration: none;
+            color: var(--white);
+            font-size: 1.1rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .download-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .download-btn:hover::before {
+            left: 100%;
+        }
+
+        .download-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .download-btn.windows:hover {
+            border-color: var(--windows-blue);
+            box-shadow: 0 10px 30px rgba(0, 120, 212, 0.3);
+        }
+
+        .download-btn.mac:hover {
+            border-color: var(--apple-gray);
+            box-shadow: 0 10px 30px rgba(51, 51, 51, 0.3);
+        }
+
+        .download-btn.linux:hover {
+            border-color: var(--linux-orange);
+            box-shadow: 0 10px 30px rgba(255, 102, 0, 0.3);
+        }
+
+        .download-btn.android:hover {
+            border-color: var(--android-green);
+            box-shadow: 0 10px 30px rgba(50, 222, 132, 0.3);
+        }
+
+        .download-btn.ios:hover {
+            border-color: var(--ios-blue);
+            box-shadow: 0 10px 30px rgba(0, 122, 255, 0.3);
+        }
+
+        .download-icon {
+            font-size: 2rem;
+            width: 50px;
+            text-align: center;
+        }
+
+        .download-text {
+            flex: 1;
+        }
+
+        .download-label {
+            font-size: 1.1rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .download-size {
+            font-size: 0.9rem;
+            color: var(--gray-light);
+        }
+
+        /* License Key Section */
+        .license-key {
+            background: var(--dark-blue);
+            border: 2px solid var(--primary-blue);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            text-align: center;
+        }
+
+        .license-key-title {
+            font-size: 1.2rem;
+            color: var(--accent-cyan);
+            margin-bottom: 1rem;
+        }
+
+        .license-key-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--white);
+            background: var(--gray-dark);
+            padding: 1rem;
+            border-radius: 8px;
+            border: 1px solid var(--gray-light);
+            letter-spacing: 2px;
+            font-family: 'Courier New', monospace;
+            margin-bottom: 1rem;
+            position: relative;
+        }
+
+        .copy-btn {
+            background: var(--gradient-primary);
+            color: var(--white);
+            border: none;
+            border-radius: 6px;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .copy-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 102, 255, 0.4);
+        }
+
+        /* Instructions */
+        .instructions-list {
+            list-style: none;
+            counter-reset: step-counter;
+        }
+
+        .instructions-list li {
+            counter-increment: step-counter;
+            position: relative;
+            padding: 1rem 0 1rem 3rem;
+            border-left: 2px solid var(--primary-blue);
+            margin-left: 1rem;
+        }
+
+        .instructions-list li::before {
+            content: counter(step-counter);
+            position: absolute;
+            left: -1rem;
+            top: 1rem;
+            background: var(--primary-blue);
+            color: var(--white);
+            width: 2rem;
+            height: 2rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .instructions-list li:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            left: -0.5rem;
+            bottom: -1rem;
+            width: 1px;
+            height: 2rem;
+            background: var(--primary-blue);
+        }
+
+        /* Support Links */
+        .support-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .support-link {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 1rem;
+            background: var(--gray-dark);
+            border: 1px solid var(--gray-light);
+            border-radius: 8px;
+            text-decoration: none;
+            color: var(--white);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .support-link:hover {
+            background: var(--primary-blue);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 102, 255, 0.3);
+        }
+
+        .support-icon {
+            font-size: 1.3rem;
+            color: var(--accent-cyan);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--dark-blue);
+            padding: 2rem 0;
+            text-align: center;
+            border-top: 1px solid var(--gray-medium);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .footer p {
+            color: var(--gray-light);
+            margin-bottom: 1rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-links a {
+            color: var(--gray-light);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-cyan);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .download-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .support-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-links {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .main-container {
+                padding: 2rem 20px;
+            }
+
+            .section {
+                padding: 1.5rem;
+            }
+
+            .success-message {
+                margin: 1rem auto;
+                padding: 1rem;
+            }
+
+            .license-key-value {
+                font-size: 1.2rem;
+                letter-spacing: 1px;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        .section:nth-child(2) { animation-delay: 0.1s; }
+        .section:nth-child(3) { animation-delay: 0.2s; }
+        .section:nth-child(4) { animation-delay: 0.3s; }
+        .section:nth-child(5) { animation-delay: 0.4s; }
+
+        /* Pulse animation for copy button */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .copy-btn.copied {
+            animation: pulse 0.3s ease;
+            background: var(--success-green);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                🛡️ SentinelShield
+            </div>
+            
+            <div class="success-message">
+                <div class="success-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <h1 class="success-title" id="thankYouMessage">Thank you for subscribing to Premium Plan!</h1>
+                <p class="success-subtitle">Your purchase was successful. Select your platform below to download and activate SentinelShield.</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-container">
+        <!-- Download Section -->
+        <section class="section">
+            <h2 class="section-title">
+                <i class="fas fa-download"></i>
+                Download SentinelShield
+            </h2>
+            <p class="section-subtitle">Choose your platform to get started with enterprise-grade security protection.</p>
+            
+            <div class="download-grid">
+                <a href="#" class="download-btn windows" data-platform="Windows">
+                    <div class="download-icon">
+                        <i class="fab fa-windows"></i>
+                    </div>
+                    <div class="download-text">
+                        <div class="download-label">Download for Windows</div>
+                        <div class="download-size">Windows 10/11 • 125 MB</div>
+                    </div>
+                </a>
+
+                <a href="#" class="download-btn mac" data-platform="Mac">
+                    <div class="download-icon">
+                        <i class="fab fa-apple"></i>
+                    </div>
+                    <div class="download-text">
+                        <div class="download-label">Download for Mac</div>
+                        <div class="download-size">macOS 10.15+ • 98 MB</div>
+                    </div>
+                </a>
+
+                <a href="#" class="download-btn linux" data-platform="Linux">
+                    <div class="download-icon">
+                        <i class="fab fa-linux"></i>
+                    </div>
+                    <div class="download-text">
+                        <div class="download-label">Download for Linux</div>
+                        <div class="download-size">Ubuntu/Debian • 87 MB</div>
+                    </div>
+                </a>
+
+                <a href="#" class="download-btn android" data-platform="Android">
+                    <div class="download-icon">
+                        <i class="fab fa-android"></i>
+                    </div>
+                    <div class="download-text">
+                        <div class="download-label">Download for Android</div>
+                        <div class="download-size">Android 8.0+ • 45 MB</div>
+                    </div>
+                </a>
+
+                <a href="#" class="download-btn ios" data-platform="iOS">
+                    <div class="download-icon">
+                        <i class="fab fa-app-store-ios"></i>
+                    </div>
+                    <div class="download-text">
+                        <div class="download-label">Download for iOS</div>
+                        <div class="download-size">iOS 13.0+ • 52 MB</div>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- License Key Section -->
+        <section class="section">
+            <h2 class="section-title">
+                <i class="fas fa-key"></i>
+                Activation Instructions
+            </h2>
+            
+            <div class="license-key">
+                <div class="license-key-title">Your License Key:</div>
+                <div class="license-key-value" id="licenseKey">SENT-4K9X-M7Q2-8P5W-SHLD</div>
+                <button class="copy-btn" onclick="copyLicenseKey()">
+                    <i class="fas fa-copy"></i> Copy Key
+                </button>
+            </div>
+
+            <ol class="instructions-list">
+                <li>Download and install SentinelShield on your device using the appropriate download button above.</li>
+                <li>Launch SentinelShield and select "Activate License" from the welcome screen.</li>
+                <li>Enter your license key exactly as shown above (copy and paste recommended).</li>
+                <li>Click "Activate" and wait for the verification process to complete.</li>
+                <li>Once activated, SentinelShield will automatically update and begin protecting your device.</li>
+            </ol>
+        </section>
+
+        <!-- Support Section -->
+        <section class="section">
+            <h2 class="section-title">
+                <i class="fas fa-life-ring"></i>
+                Need Help Getting Started?
+            </h2>
+            <p class="section-subtitle">Our support team is here to help you every step of the way.</p>
+            
+            <div class="support-grid">
+                <a href="#" class="support-link" data-support="Installation Guide">
+                    <div class="support-icon">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <div>Installation Guide</div>
+                </a>
+
+                <a href="#" class="support-link" data-support="Contact Support">
+                    <div class="support-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <div>Contact Support</div>
+                </a>
+
+                <a href="#" class="support-link" data-support="FAQs">
+                    <div class="support-icon">
+                        <i class="fas fa-question-circle"></i>
+                    </div>
+                    <div>FAQs</div>
+                </a>
+
+                <a href="#" class="support-link" data-support="Video Tutorials">
+                    <div class="support-icon">
+                        <i class="fas fa-play-circle"></i>
+                    </div>
+                    <div>Video Tutorials</div>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Support</a>
+                <a href="#">Contact Us</a>
+            </div>
+            <p>&copy; 2025 SentinelShield. All rights reserved. | Protecting your digital world since 2020.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize page based on URL parameters or default to Premium
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get plan from URL parameters (example: ?plan=enterprise)
+            const urlParams = new URLSearchParams(window.location.search);
+            const plan = urlParams.get('plan') || 'premium';
+            
+            // Update thank you message based on plan
+            const thankYouMessage = document.getElementById('thankYouMessage');
+            const planName = plan.charAt(0).toUpperCase() + plan.slice(1);
+            thankYouMessage.textContent = `Thank you for subscribing to ${planName} Plan!`;
+            
+            // Generate unique license key based on plan
+            generateLicenseKey(plan);
+        });
+
+        // Download button click handlers
+        document.querySelectorAll('.download-btn').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                const platform = this.getAttribute('data-platform');
+                
+                // Add visual feedback
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 150);
+                
+                // Show download alert
+                alert(`Your download for ${platform} will start shortly. Thank you for choosing SentinelShield!`);
+                
+                // In a real implementation, you would trigger the actual download here
+                console.log(`Download initiated for platform: ${platform}`);
+            });
+        });
+
+        // Support link click handlers
+        document.querySelectorAll('.support-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const supportType = this.getAttribute('data-support');
+                
+                // Add visual feedback
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 150);
+                
+                // Show support alert
+                alert(`Redirecting to ${supportType}...`);
+                
+                // In a real implementation, you would redirect to the appropriate support page
+                console.log(`Support requested: ${supportType}`);
+            });
+        });
+
+        // Copy license key functionality
+        function copyLicenseKey() {
+            const licenseKey = document.getElementById('licenseKey').textContent;
+            const copyBtn = document.querySelector('.copy-btn');
+            
+            // Copy to clipboard
+            navigator.clipboard.writeText(licenseKey).then(function() {
+                // Visual feedback
+                copyBtn.classList.add('copied');
+                copyBtn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                
+                // Reset button after 2 seconds
+                setTimeout(() => {
+                    copyBtn.classList.remove('copied');
+                    copyBtn.innerHTML = '<i class="fas fa-copy"></i> Copy Key';
+                }, 2000);
+                
+                console.log('License key copied to clipboard:', licenseKey);
+            }).catch(function(err) {
+                // Fallback for browsers that don't support clipboard API
+                console.error('Could not copy text: ', err);
+                alert('License key: ' + licenseKey + '\n\nPlease copy this key manually.');
+            });
+        }
+
+        // Generate license key based on plan
+        function generateLicenseKey(plan) {
+            const prefixes = {
+                'premium': 'SENT',
+                'enterprise': 'ENTP'
+            };
+            
+            const prefix = prefixes[plan] || 'SENT';
+            const segments = [];
+            
+            // Generate 4 segments of 4 characters each
+            for (let i = 0; i < 4; i++) {
+                let segment = '';
+                for (let j = 0; j < 4; j++) {
+                    const chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+                    segment += chars.charAt(Math.floor(Math.random() * chars.length));
+                }
+                segments.push(segment);
+            }
+            
+            // Combine with prefix
+            const licenseKey = prefix + '-' + segments.join('-');
+            document.getElementById('licenseKey').textContent = licenseKey;
+        }
+
+        // Add smooth scrolling for any anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Add keyboard navigation support
+        document.addEventListener('keydown', function(e) {
+            // Press 'C' to copy license key
+            if (e.key === 'c' || e.key === 'C') {
+                if (e.ctrlKey || e.metaKey) {
+                    return; // Let browser handle Ctrl+C
+                }
+                copyLicenseKey();
+            }
+        });
+
+        // Add loading states for download buttons
+        function simulateDownload(platform) {
+            const button = document.querySelector(`[data-platform="${platform}"]`);
+            if (button) {
+                const originalText = button.querySelector('.download-label').textContent;
+                button.querySelector('.download-label').textContent = 'Preparing download...';
+                button.style.opacity = '0.7';
+                button.style.pointerEvents = 'none';
+                
+                setTimeout(() => {
+                    button.querySelector('.download-label').textContent = originalText;
+                    button.style.opacity = '1';
+                    button.style.pointerEvents = 'auto';
+                }, 3000);
+            }
+        }
+
+        // Console welcome message
+        console.log(`
+        🛡️ SentinelShield Download Page
+        ================================
+        Thank you for choosing SentinelShield!
+        
+        This page provides:
+        • Platform-specific downloads
+        • License key management
+        • Activation instructions
+        • Support resources
+        
+        For developers: All download and support links are currently placeholder functions.
+        Replace the alert() calls with actual download URLs and support page redirects.
+        `);
+    </script>
+</body>
+</html>
