@@ -667,16 +667,16 @@
                         <li>Early access to new features</li>
                         <li>Community support</li>
                     </ul>
-                    
+                   
                     <!-- Enhanced Download Section -->
                     <div class="download-section">
                         <div id="platform-message" class="platform-message" style="display: none;">
-                            We detected you're using <span id="detected-platform"></span>. 
-                            <span id="auto-download-text">Download will start automatically,</span> 
+                            We detected you're using <span id="detected-platform"></span>.
+                            <span id="auto-download-text">Download will start automatically,</span>
                             or choose another platform below.
                         </div>
                         <div class="download-buttons">
-                            <a href="https://jottacloud.com/s/428313e9fcdce7e4642a018e496311d541a/thumbs" id="windows-btn">
+                            <a href="https://jottacloud.com/s/428313e9fcdce7e4642a018e496311d541a" class="btn btn-primary download-btn windows-btn" id="windows-btn">
                                 <span class="platform-logo">
                                     <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
                                         <path d="M3,12V6.75L9,5.43V11.91L3,12M20,3V11.75L10,11.9V5.21L20,3M3,13L9,13.09V19.9L3,18.75V13M20,13.25V22L10,20.09V13.1L20,13.25Z"/>
@@ -795,7 +795,7 @@
             card.addEventListener('mouseenter', () => {
                 card.style.transform = 'translateY(-10px) scale(1.02)';
             });
-            
+           
             card.addEventListener('mouseleave', () => {
                 card.style.transform = 'translateY(0) scale(1)';
             });
@@ -808,27 +808,27 @@
             const windowsBtn = document.getElementById('windows-btn');
             const androidBtn = document.getElementById('android-btn');
             const autoDownloadText = document.getElementById('auto-download-text');
-            
+           
             // Detect platform
             let platform = 'unknown';
             let isMobile = false;
             const userAgent = navigator.userAgent || navigator.vendor || window.opera;
-            
+           
             // Windows detection
             if (/windows/i.test(userAgent)) {
                 platform = 'Windows';
-            } 
+            }
             // Android detection
             else if (/android/i.test(userAgent)) {
                 platform = 'Android';
                 isMobile = true;
             }
-            
+           
             // Show platform message if detection succeeded
             if (platform !== 'unknown') {
                 platformMessage.style.display = 'block';
                 detectedPlatform.textContent = platform;
-                
+               
                 // Highlight the appropriate button
                 if (platform === 'Windows') {
                     windowsBtn.classList.add('recommended');
@@ -839,7 +839,7 @@
                     androidBtn.style.fontWeight = 'bold';
                     androidBtn.style.border = '2px solid #00ffff';
                 }
-                
+               
                 // Auto-trigger download (only for desktop, and after a short delay)
                 if (!isMobile && platform === 'Windows') {
                     setTimeout(() => {
@@ -865,7 +865,7 @@
             margin-top: 20px;
             text-align: center;
         }
-        
+       
         .platform-message {
             background-color: rgba(0, 180, 255, 0.1);
             padding: 12px;
@@ -874,13 +874,13 @@
             font-size: 14px;
             border-left: 3px solid #00b4ff;
         }
-        
+       
         .download-buttons {
             display: flex;
             flex-direction: column;
             gap: 10px;
         }
-        
+       
         .download-btn {
             transition: all 0.3s ease;
             position: relative;
@@ -891,12 +891,12 @@
             gap: 8px;
             padding: 12px 20px;
         }
-        
+       
         .download-btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(0, 180, 255, 0.3);
         }
-        
+       
         .download-btn.recommended::after {
             content: 'Recommended';
             position: absolute;
@@ -909,21 +909,21 @@
             border-radius: 10px;
             font-weight: bold;
         }
-        
+       
         .windows-btn {
             background: linear-gradient(135deg, #0078d7, #00b4ff);
         }
-        
+       
         .android-btn {
             background: linear-gradient(135deg, #3ddc84, #2bb673);
         }
-        
+       
         .platform-logo {
             display: inline-flex;
             align-items: center;
-            
+           
         }
-        
+       
         @media (max-width: 768px) {
             .download-buttons {
                 flex-direction: column;
